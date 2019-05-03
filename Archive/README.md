@@ -1,10 +1,10 @@
 # Word Guess Game (Browser)
 
-<!-- TODO: add one sentence overview here of your progress -->
+About 50% done, according to test.html through FireFix browser
 
 ## Overview
 
-<!-- TODO: add a description of your assignment, theme, approach, and solution here -->
+Assignment not finished yet, too many unanswered questions about the various methods needed
 
 ## Functionality Breakdown
 <!-- TODO: update this to your screenshot, gif, etc. demonstrating functionality. add any additional explanation below -->
