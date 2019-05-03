@@ -29,11 +29,18 @@ var randomWord = function(gameWords) {
     return guessWord;
 };
 var isCorrectGuess = function (word, letter) {
-    var word;
-    var letter;
     for (var i = 0; i < word.length; i++) {
-        if (letter === word[i]) {
-            return "you typed " + letter;
+        if (word.includes(letter)) {
+            return true;
+        }
+        else if (letter === word.charAt(word.length - 1)) {
+            return true;
+        }
+        else if (letter === word.charAt(0)) {
+            return true;
+        }
+        else {
+            return false;
         }
     }      
-}
+};
