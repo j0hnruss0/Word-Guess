@@ -1,3 +1,5 @@
+var playerWins = 0;
+var playerLosses = 0;
 var gameWords = [
     "moist",
     "slurp",
@@ -21,24 +23,17 @@ var gameWords = [
     "munch",
     "soggy",
     "splayed",
-    "seepage",
-    "plop"
+    "seepage"
 ];
 
-var randomWord = function(gameWords) {
-    var guessWord = gameWords[Math.floor(Math.random() * gameWords.length)];
-    return guessWord;
+function randomWord(gameWords) {
+    var word = gameWords[Math.floor(Math.random() * gameWords.length)];
+    return word;
 };
 
-var isCorrectGuess = function (word, letter) {
+function isCorrectGuess(word, letter) {
     for (var i = 0; i < word.length; i++) {
         if (word.includes(letter)) {
-            return true;
-        }
-        else if (letter === word.charAt(word.length - 1)) {
-            return true;
-        }
-        else if (letter === word.charAt(0)) {
             return true;
         }
         else {
@@ -47,7 +42,7 @@ var isCorrectGuess = function (word, letter) {
     }      
 };
 
-var getBlanks = function (word) {
+function getBlanks(word) {
     var blankArray = [];
     for (var j = 0; j < word.length; j++) {
         blankArray.push("_");
@@ -55,43 +50,97 @@ var getBlanks = function (word) {
     return blankArray;
 };
 
-
-// Not sure how to finish this function; don't know how to replace underscores
-// when letter occurs multiple times in a word
-var fillBlanks = function (word, currentGame, letter) {
-    if (word.includes(letter)) {
-        for (var k = 0; k < currentGame.length; k++) {
-            if ((currentGame[k] === "_") && (word[k] === letter)) {
-                currentGame.splice(k, 1, letter);
-                return currentGame;
-            }
-            else if ((currentGame[k] === letter) && (word[k] === letter)) {
-                return null;
+function fillBlanks(word, puzzleState, letter) {
+    for (var k = 0; k < puzzleState.length; k++) {
+            if ((puzzleState[k] === "_") && (word[k] === letter)) {
+                puzzleState[k] = letter;
             }
         }
+    
+        return puzzleState;
+};
+
+function setupRound(word) {
+    var round = {
+            word: word,
+            guessesLeft: 9,
+            wrongGuesses: [],
+            puzzleState: []
+        
+        }   
+        
+    return round;
+};
+
+function updateRound(round, letter) {
+
+    var newPuzzleState = fillBlanks(round.word, round.puzzleState, letter); //value
+    if (round.word.includes(letter)) {
+        round.puzzleState = newPuzzleState;
+    }
+    else {
+        round.guessesLeft--;
+        round.wrongGuesses.push(letter);
+    }
+};
+
+function hasWon(puzzleState) {
+    if (puzzleState.includes("_") === true) {
+        return false;
+    }
+    else if (puzzleState.includes("_") === false) {
+        return true;
+    }
+   
+};
+
+function hasLost(guessesLeft) {
+    if (guessesLeft === 0) {
+        return true;
     }
     else {
         return false;
     }
 };
 
-var setupRound = function (word) {
-    var currentGame;
-    var round = {
-        word: word,
-        guessesLeft: 9,
-        wrongGuesses: [],
-        puzzleState: []
-    };
-    return round;
-};
-
-var updateRound = function (round, letter) {
-    if (letter === true) {
-        round.guessesLeft;
+function isEndOfRound(round) {
+    if (round.puzzleState.includes("_") === false) {
+        return true;
+    }
+    else if (round.guessesLeft === 0) {
+        return true;
     }
     else {
-        round.guessesLeft--;
-        round.wrongGuesses.push(letter);
+        return false;
     }
+        
+};
+
+function setupGame(gameWords, playerWins, playerLosses) {
+    var word = randomWord(gameWords);
+    var game = {
+        wins: playerWins,
+        losses: playerLosses,
+        round: setupRound(word)
+    }
+
+    return game;
+};
+
+function startNewRound(game) {
+    
+    setupGame(gameWords, playerWins, playerLosses);
+    
+    if (hasWon(game.round.puzzleState) === true) {
+        game.wins++;
+        alert("You Win! The word was " + game.round.word + ". You have won " + game.wins + " time(s)!");
+    }
+    else if (hasLost(game.round.guessesLeft) === true) {
+        game.losses++;
+        alert("You lose... The word was " + game.round.word + ". You have lost " + game.losses + " times.");
+    }
+};
+
+var myGame = {
+    words: gameWords
 };
