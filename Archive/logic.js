@@ -1,5 +1,3 @@
-var playerWins = 0;
-var playerLosses = 0;
 var gameWords = [
     "moist",
     "slurp",
@@ -143,4 +141,5 @@ function startNewRound(game) {
 
 var myGame = {
     words: gameWords
-};
+}
+

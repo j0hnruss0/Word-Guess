@@ -4,10 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Word Guess! (Formerly Hangman)</title>
 </head>
 <body>
+    <div class="header">
+        <!--<h1><span class="innocentWords">Innocent Words</span> that make you feel <span class="dirty">Dirty!</span></h1>-->
+    </div>
+   <div class="container">
+        <div class="row">
+            <div class="thePics columns">
+
+            </div>
+            <div class="columns" id="puzzle-state"></div>
+        </div>
+        <div class="row">
+            <div class="thePics columns">
+
+            </div>
+            <div class="columns">
+                <div class="stats">Picked Letters: <span id="wrong-guesses"></span></div>
+                <div class="stats">Number of guesses: <span id="guesses-left">9</span></div>
+                <div class="stats">Wins: <span id="win-counter"></span></div>
+                <div class="stats">Losses: <span id="loss-counter"></span></div>
+            </div>
+            
+        </div>
+    </div>
     
-    <script type="text/javascript" src="logic.js"></script>
+    <script type="text/javascript" src="newLogic.js"></script>
 </body>
 </html>

@@ -1,0 +1,43 @@
+h1 {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; 
+    font-size: 50px; 
+    font-style: normal; 
+    text-align: center;
+}
+
+.innocentWords {
+    text-shadow: 2px 2px 5px gold;
+    font-size: 70px;
+}
+
+.dirty {
+    text-shadow: 2px 2px olivedrab;
+    font-size: 70px;
+}
+
+.container {
+    width: 100%;
+    padding: 10px;
+    justify-content: center;
+}
+
+.row {
+    padding: 5px;
+    margin: 5px;
+}
+
+.header {
+    background-color: bisque;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.columns {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.thePics {
+    float: left;
+}
