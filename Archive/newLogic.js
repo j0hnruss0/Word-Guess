@@ -37,6 +37,7 @@ document.onkeyup = function myGuess(event, word, puzzleState) {
     var letter = event.key;
     var word = myGame.round.word;
     console.log("letter is " + letter);
+    console.log("puzzlestate:", puzzleState)
     if (word.includes(letter)) {
         console.log("Here!");
         fillBlanks(word, letter, puzzleState);
@@ -47,7 +48,7 @@ document.onkeyup = function myGuess(event, word, puzzleState) {
 // will not change the puzzleState array for unknown reasons
 function fillBlanks(word, letter, puzzleState) {
     for (var k = 0; k < word.length; k++) {
-        if ((word[k] === letter) && (puzzleState[k] === (" _ "))) {
+        if ((word[k] === letter) && (puzzleState[k] === "_")) {
             puzzleState[k] = letter;
             document.getElementById("puzzle-state").innerHTML = puzzleState;
         }

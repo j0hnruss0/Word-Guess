@@ -9,20 +9,20 @@
 </head>
 <body>
     <div class="header">
-        <!--<h1><span class="innocentWords">Innocent Words</span> that make you feel <span class="dirty">Dirty!</span></h1>-->
+        <h1><span class="innocentWords">Innocent Words</span> that sound <span class="dirty">Dirty!</span></h1>
     </div>
    <div class="container">
         <div class="row">
-            <div class="thePics columns">
-
+            <div class="columns">
+                <img id="GrossPic" src="gross-words.jpg" alt="pic-1">
             </div>
             <div class="columns" id="puzzle-state"></div>
         </div>
         <div class="row">
-            <div class="thePics columns">
-
-            </div>
             <div class="columns">
+                <img id="RonPic" src="ron-swanson.jpg" alt="pic-">
+            </div>
+            <div class="columns" id="stats-column">
                 <div class="stats">Picked Letters: <span id="wrong-guesses"></span></div>
                 <div class="stats">Number of guesses: <span id="guesses-left">9</span></div>
                 <div class="stats">Wins: <span id="win-counter"></span></div>
@@ -31,7 +31,8 @@
             
         </div>
     </div>
+    <div class="footer"><span>Made by John Russo</span></div>
     
-    <script type="text/javascript" src="newLogic.js"></script>
+    <script type="text/javascript" src="logic.js"></script>
 </body>
 </html>

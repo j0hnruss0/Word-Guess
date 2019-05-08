@@ -24,6 +24,8 @@ var gameWords = [
     "seepage"
 ];
 
+// Body of all the game's logic. Functions mostly self explanitory
+
 function randomWord(gameWords) {
     var word = gameWords[Math.floor(Math.random() * gameWords.length)];
     return word;
@@ -63,7 +65,7 @@ function setupRound(word) {
             word: word,
             guessesLeft: 9,
             wrongGuesses: [],
-            puzzleState: []
+            puzzleState: getBlanks(word)
         
         }   
         
@@ -72,7 +74,7 @@ function setupRound(word) {
 
 function updateRound(round, letter) {
 
-    var newPuzzleState = fillBlanks(round.word, round.puzzleState, letter); //value
+    var newPuzzleState = fillBlanks(round.word, round.puzzleState, letter);
     if (round.word.includes(letter)) {
         round.puzzleState = newPuzzleState;
     }
@@ -101,6 +103,8 @@ function hasLost(guessesLeft) {
     }
 };
 
+// isEndOfRound() not used in final version of game
+
 function isEndOfRound(round) {
     if (round.puzzleState.includes("_") === false) {
         return true;
@@ -114,6 +118,8 @@ function isEndOfRound(round) {
         
 };
 
+// setupGame() is the first function to run, called in myGame Object
+
 function setupGame(gameWords, playerWins, playerLosses) {
     var word = randomWord(gameWords);
     var game = {
@@ -121,25 +127,101 @@ function setupGame(gameWords, playerWins, playerLosses) {
         losses: playerLosses,
         round: setupRound(word)
     }
-
+    console.log(game)
     return game;
 };
 
+// startNewRound() more accurately handles what happens when "game over" conditions are met
+
 function startNewRound(game) {
-    
-    setupGame(gameWords, playerWins, playerLosses);
     
     if (hasWon(game.round.puzzleState) === true) {
         game.wins++;
-        alert("You Win! The word was " + game.round.word + ". You have won " + game.wins + " time(s)!");
+        document.getElementById("win-counter").innerHTML = myGame.game.wins;
+        alert("You Win! The word was ((" + game.round.word + ")). You have won " + game.wins + " time(s)!");
+        cleanUp();
     }
     else if (hasLost(game.round.guessesLeft) === true) {
         game.losses++;
-        alert("You lose... The word was " + game.round.word + ". You have lost " + game.losses + " times.");
+        document.getElementById("loss-counter").innerHTML = myGame.game.losses;
+        alert("You lose... The word was ((" + game.round.word + ")). You have lost " + game.losses + " times.");
+        cleanUp();
     }
 };
 
-var myGame = {
-    words: gameWords
-}
+//---------COMMENTED OUT CODE: was written for buttons, decided not used buttons for final code
 
+//function makeButtons() {
+//    var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+//    var letterButtons = document.getElementById("button-column");
+//    for (var h = 0; h < letters.length; h++) {
+//        var btn = document.createElement("button");
+//        var btnText = document.createTextNode(letters[h]);
+//        btn.appendChild(btnText);
+//        btn.id = letters[h].toLowerCase();
+//        letterButtons.appendChild(btn);
+//   }
+//}
+
+//makeButtons();
+//--------------------------------------------------------------------------------
+
+// Game object and variables/HTML page modifiers for initial game
+
+var myGame = {
+    game: setupGame(gameWords, 0, 0),
+    words: gameWords,
+    round: {
+        puzzleState: []
+    }
+};
+
+var puzzleState = document.getElementById("puzzle-state");
+var playerWins = document.getElementById("win-counter");
+var playerLosses = document.getElementById("loss-counter");
+puzzleState.innerHTML = myGame.game.round.puzzleState;
+playerWins.innerHTML = 0;
+playerLosses.innerHTML = 0;
+
+//-------------------------------------------------------------------------
+//document.getElementById("a").addEventListener("click", function(word) {
+//    console.log("This is A");
+//});
+//-------------------------------------------------------------------------
+
+//On key press function
+
+document.onkeyup = function myGuess(event, word, puzzleState) {
+    var round = myGame.game.round;
+    var letter = event.key;
+    var word = myGame.game.round.word;
+    var puzzleState = myGame.game.round.puzzleState;
+    console.log("letter is " + letter);
+    console.log("puzzlestate:", puzzleState)
+    if (word.includes(letter) === true) {
+        console.log("right choice!");
+        updateRound(round, letter);
+        document.getElementById("puzzle-state").innerHTML = myGame.game.round.puzzleState;
+    } else if (word.includes(letter) === false) {
+        console.log("oops");
+        updateRound(round, letter);
+        document.getElementById("guesses-left").innerHTML = myGame.game.round.guessesLeft;
+        document.getElementById("wrong-guesses").innerHTML = myGame.game.round.wrongGuesses;
+    }
+    startNewRound(myGame.game);
+
+};
+
+//This function restarts the game
+
+function cleanUp() {
+    var playerWins = myGame.game.wins;
+    var playerLosses = myGame.game.losses;
+    document.getElementById("puzzle-state").innerHTML = myGame.game.round.word;
+    myGame.game.round.guessesLeft = 9;
+    document.getElementById("guesses-left").innerHTML = myGame.game.round.guessesLeft;
+    myGame.game.round.wrongGuesses = "";
+    document.getElementById("wrong-guesses").innerHTML = myGame.game.round.wrongGuesses;
+    myGame.game = setupGame(gameWords, playerWins, playerLosses);
+
+};
