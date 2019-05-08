@@ -179,7 +179,7 @@ var myGame = {
 var puzzleState = document.getElementById("puzzle-state");
 var playerWins = document.getElementById("win-counter");
 var playerLosses = document.getElementById("loss-counter");
-puzzleState.innerHTML = myGame.game.round.puzzleState;
+puzzleState.innerHTML = myGame.game.round.puzzleState.join(" ");
 playerWins.innerHTML = 0;
 playerLosses.innerHTML = 0;
 
@@ -201,7 +201,7 @@ document.onkeyup = function myGuess(event, word, puzzleState) {
     if (word.includes(letter) === true) {
         console.log("right choice!");
         updateRound(round, letter);
-        document.getElementById("puzzle-state").innerHTML = myGame.game.round.puzzleState;
+        document.getElementById("puzzle-state").innerHTML = myGame.game.round.puzzleState.join(" ");
     } else if (word.includes(letter) === false) {
         console.log("oops");
         updateRound(round, letter);
