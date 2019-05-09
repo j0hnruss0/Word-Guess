@@ -78,3 +78,74 @@ body {
     text-align: center;
     background-color: lightgray;
 }
+
+@media screen and (max-width: 980px) {
+
+    #GrossPic {
+        width: 35%;
+        float: left;
+    }
+    
+    #RonPic {
+        width: 35%;
+        float: left;
+    }
+
+    .container {
+        margin-bottom: 50px;
+    }
+
+}
+
+@media screen and (max-width: 730px) {
+
+    #puzzle-state {
+        position: relative;
+        left: 100px;
+        top: 25px;
+    }
+
+    #stats-column {
+        width: 60%;
+        position: relative;
+        left: 100px;
+        padding-top: 10px; 
+    }
+
+
+}
+
+@media screen and (max-width: 640px) {
+
+    .header {
+        font-size: 45px;
+    }
+
+    .innocentWords,
+    .dirty {
+        font-size: 55px;
+    }
+
+    #GrossPic {
+        display: none;
+    }
+
+    #RonPic {
+        width: 45%;
+        float: none;
+        position: relative;
+        left: 80px;
+    }
+
+    #puzzle-state {
+        position: relative;
+        text-align: center;
+        left: 0px;
+        top: 0px;
+    }
+
+    .container {
+        margin-bottom: 125px;
+    }
+
+}
