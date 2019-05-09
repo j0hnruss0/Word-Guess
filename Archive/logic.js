@@ -191,22 +191,27 @@ playerLosses.innerHTML = 0;
 
 //On key press function
 
+
+
 document.onkeyup = function myGuess(event, word, puzzleState) {
     var round = myGame.game.round;
     var letter = event.key;
+    var letterCheck = event.keyCode;
     var word = myGame.game.round.word;
     var puzzleState = myGame.game.round.puzzleState;
     console.log("letter is " + letter);
     console.log("puzzlestate:", puzzleState)
-    if (word.includes(letter) === true) {
+    if ((word.includes(letter) === true) && ((letterCheck > 64 && letterCheck < 91) || (letterCheck > 96 && letterCheck < 123) || letterCheck == 8)) {
         console.log("right choice!");
         updateRound(round, letter);
         document.getElementById("puzzle-state").innerHTML = myGame.game.round.puzzleState.join(" ");
-    } else if (word.includes(letter) === false) {
+    } else if ((word.includes(letter) === false) && ((letterCheck > 64 && letterCheck < 91) || (letterCheck > 96 && letterCheck < 123) || letterCheck == 8)) {
         console.log("oops");
         updateRound(round, letter);
         document.getElementById("guesses-left").innerHTML = myGame.game.round.guessesLeft;
         document.getElementById("wrong-guesses").innerHTML = myGame.game.round.wrongGuesses;
+    } else {
+        alert("Letters only. Pick again")
     }
     startNewRound(myGame.game);
 
