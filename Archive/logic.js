@@ -217,11 +217,11 @@ document.onkeyup = function myGuess(event, word, puzzleState) {
 function cleanUp() {
     var playerWins = myGame.game.wins;
     var playerLosses = myGame.game.losses;
-    document.getElementById("puzzle-state").innerHTML = myGame.game.round.word;
     myGame.game.round.guessesLeft = 9;
     document.getElementById("guesses-left").innerHTML = myGame.game.round.guessesLeft;
     myGame.game.round.wrongGuesses = "";
     document.getElementById("wrong-guesses").innerHTML = myGame.game.round.wrongGuesses;
     myGame.game = setupGame(gameWords, playerWins, playerLosses);
+    document.getElementById("puzzle-state").innerHTML = myGame.game.round.puzzleState.join(" ");
 
 };
